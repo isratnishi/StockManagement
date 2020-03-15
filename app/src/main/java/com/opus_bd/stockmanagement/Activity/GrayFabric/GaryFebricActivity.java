@@ -1,31 +1,17 @@
 package com.opus_bd.stockmanagement.Activity.GrayFabric;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
-import com.google.android.material.tabs.TabLayout;
-import com.opus_bd.stockmanagement.Activity.DashBoardActivity;
-import com.opus_bd.stockmanagement.Activity.GrayFabric.RackIn.GrayFebricRackInActivity;
-import com.opus_bd.stockmanagement.Activity.GrayFabric.RackIn.GrayFebricRackOutActivity;
-import com.opus_bd.stockmanagement.Activity.ListActivity;
-import com.opus_bd.stockmanagement.Activity.WareHouseActivity;
-import com.opus_bd.stockmanagement.Fragment.GrayFebric.HistoryFragment;
-import com.opus_bd.stockmanagement.Fragment.GrayFebric.RankInFragment;
-import com.opus_bd.stockmanagement.R;
+import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.bumptech.glide.Glide;
+import com.opus_bd.stockmanagement.Activity.GrayFabric.RackIn.GrayFebricRackInActivity;
+import com.opus_bd.stockmanagement.Activity.GrayFabric.Rackout.GrayFebricRackOutActivity;
+import com.opus_bd.stockmanagement.Activity.ListActivity;
+import com.opus_bd.stockmanagement.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -51,8 +37,8 @@ public class GaryFebricActivity extends AppCompatActivity {
     }
 
     public void imageload() {
-        Glide.with(this).load(R.drawable.finised_febric).into(ivFinishedFebric);
-        Glide.with(this).load(R.drawable.gray_febric).into(ivGrayFebric);
+        Glide.with(this).load(R.drawable.ic_rackin).into(ivFinishedFebric);
+        Glide.with(this).load(R.drawable.ic_rackout).into(ivGrayFebric);
 
     }
 

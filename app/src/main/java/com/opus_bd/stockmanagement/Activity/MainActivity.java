@@ -1,10 +1,5 @@
 package com.opus_bd.stockmanagement.Activity;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,10 +7,11 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
-import com.opus_bd.stockmanagement.Model.LoginResponce;
-import com.opus_bd.stockmanagement.Model.UserModel;
 import com.opus_bd.stockmanagement.R;
 import com.opus_bd.stockmanagement.RetrofitService.RetrofitClientInstance;
 import com.opus_bd.stockmanagement.RetrofitService.RetrofitService;
@@ -42,7 +38,7 @@ String itemname,CellID;
         button_scan_qr_code.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                (new IntentIntegrator((Activity)MainActivity.this)).initiateScan();
+                (new IntentIntegrator(MainActivity.this)).initiateScan();
             }
         });
         Bundle bundle = getIntent().getExtras();
@@ -61,7 +57,7 @@ String itemname,CellID;
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (result != null) {
             if (result.getContents() == null) {
-                Toast.makeText((Context)this, (CharSequence)"Cancelled", LENGTH_LONG).show();
+                Toast.makeText(this, "Cancelled", LENGTH_LONG).show();
             } else if(result.getContents().equals(itemname)) {
                 text.setText("Matched Successfully");
                 text.setTextColor(getResources().getColor(R.color.successColor));
@@ -108,5 +104,13 @@ String itemname,CellID;
 
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 }

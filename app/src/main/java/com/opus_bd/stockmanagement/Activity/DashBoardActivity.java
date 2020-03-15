@@ -1,23 +1,17 @@
 package com.opus_bd.stockmanagement.Activity;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.opus_bd.stockmanagement.Activity.StockIn.List2Activity;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.opus_bd.stockmanagement.Adapter.AllStorageDetailsInfoListAdapter;
-import com.opus_bd.stockmanagement.Adapter.RecivedFinishListAdapter;
 import com.opus_bd.stockmanagement.Model.DashBoard.AllStorageDetailsInfo;
-import com.opus_bd.stockmanagement.Model.FinishFebricsMaster;
 import com.opus_bd.stockmanagement.R;
 import com.opus_bd.stockmanagement.RetrofitService.RetrofitClientInstance;
 import com.opus_bd.stockmanagement.RetrofitService.RetrofitService;
@@ -122,5 +116,13 @@ public class DashBoardActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        Intent intent = new Intent(this, ListActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 }

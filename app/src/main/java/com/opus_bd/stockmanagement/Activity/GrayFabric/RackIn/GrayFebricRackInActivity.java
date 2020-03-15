@@ -1,12 +1,13 @@
 package com.opus_bd.stockmanagement.Activity.GrayFabric.RackIn;
 
+import android.content.Intent;
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-
-import android.os.Bundle;
 
 import com.google.android.material.tabs.TabLayout;
 import com.opus_bd.stockmanagement.Activity.GrayFabric.GaryFebricActivity;
@@ -72,5 +73,13 @@ public class GrayFebricRackInActivity extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             return mFragmentTitleList.get(position);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        Intent intent = new Intent(this, GaryFebricActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 }

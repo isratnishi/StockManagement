@@ -6,8 +6,9 @@ import com.opus_bd.stockmanagement.Model.DashBoard.AllStorageDetailsInfo;
 import com.opus_bd.stockmanagement.Model.FabricDetails;
 import com.opus_bd.stockmanagement.Model.FinishFabricStorageByRecevedNo;
 import com.opus_bd.stockmanagement.Model.GrayFabric.GrayFebricDetails;
-import com.opus_bd.stockmanagement.Model.GrayFabric.RackIn.AllCurrentGrayFebricDetails;
 import com.opus_bd.stockmanagement.Model.GrayFabric.RackIn.GrayFabricRackingList;
+import com.opus_bd.stockmanagement.Model.GrayFabric.RackOut.Rackout;
+import com.opus_bd.stockmanagement.Model.GrayFabric.RackOut.RackoutById;
 import com.opus_bd.stockmanagement.Model.GrayFabric.ReceivedGrayFabric;
 import com.opus_bd.stockmanagement.Model.GrayFabric.StockIn.GrayFabricStorageList;
 import com.opus_bd.stockmanagement.Model.LoginResponce;
@@ -48,6 +49,17 @@ public interface RetrofitService {
     @GET("api/GrayFabric/GetReceivedGrayFabricStorageList  ")
     Call<List<ReceivedGrayFabric>> GetReceivedGrayFabricStorageList(@Header("Authorization") String token);
 
+
+    @GET("api/GrayFabric/RackOutGrayFabricsListAPI")
+    Call<Rackout> RackOutGrayFabricsListAPI(@Header("Authorization") String token);
+
+
+    @GET("api/GrayFabric/GrayFabricRackOutEditListAPI/{id}")
+    Call<RackoutById> GrayFabricRackOutEditListAPI(@Header("Authorization") String token, @Path("id") int id);
+
+
+    @PUT("api/GrayFabric/GrayFabricRackOutEditAPI/{detailsId}")
+    Call<String> GrayFabricRackOutEditAPI(@Header("Authorization") String token, @Path("detailsId") int id);
 
     @PUT("api/GrayFabric/UpdateGrayFabricReceiveStatusAPI/{rackId}/{detailsId}")
     Call<String> UpdateGrayFabricReceiveStatusAPI(@Header("Authorization") String token, @Path("rackId") int masterId, @Path("detailsId") int id);

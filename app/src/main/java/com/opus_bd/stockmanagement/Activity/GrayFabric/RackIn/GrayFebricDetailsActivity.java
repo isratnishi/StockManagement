@@ -1,13 +1,13 @@
 package com.opus_bd.stockmanagement.Activity.GrayFabric.RackIn;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.widget.Toast;
 
 import com.opus_bd.stockmanagement.Activity.LoginActivity;
 import com.opus_bd.stockmanagement.Activity.StockIn.List2Activity;
@@ -106,4 +106,11 @@ public class GrayFebricDetailsActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+
+        Intent intent = new Intent(this, GrayFebricRackInActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
 }

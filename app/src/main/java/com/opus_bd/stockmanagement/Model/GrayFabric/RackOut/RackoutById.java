@@ -1,141 +1,63 @@
 
 package com.opus_bd.stockmanagement.Model.GrayFabric.RackOut;
 
-import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class RackoutById {
 
-    @SerializedName("id")
+    @SerializedName("issueNo")
     @Expose
-    private Object id;
-    @SerializedName("receiveNo")
+    private Object issueNo;
+    @SerializedName("issueDate")
     @Expose
-    private Object receiveNo;
-    @SerializedName("autoNo")
+    private Object issueDate;
+    @SerializedName("issueBy")
     @Expose
-    private Object autoNo;
-    @SerializedName("receiveDate")
-    @Expose
-    private Object receiveDate;
-    @SerializedName("inspectionDate")
-    @Expose
-    private Object inspectionDate;
-    @SerializedName("receiveBy")
-    @Expose
-    private Object receiveBy;
-    @SerializedName("monthName")
-    @Expose
-    private Object monthName;
-    @SerializedName("statusId")
-    @Expose
-    private Object statusId;
+    private Object issueBy;
     @SerializedName("remarks")
     @Expose
     private Object remarks;
     @SerializedName("isFinal")
     @Expose
     private Object isFinal;
-    @SerializedName("grayFebricsMasters")
+    @SerializedName("batchNo")
     @Expose
-    private Object grayFebricsMasters;
-    @SerializedName("reveivedGrayFabrics")
+    private Object batchNo;
+    @SerializedName("grayFabricIssueDetailViewModels")
     @Expose
-    private Object reveivedGrayFabrics;
-    @SerializedName("grayFebricsDetails")
+    private Object grayFabricIssueDetailViewModels;
+    @SerializedName("grayFabricIssueDetails")
     @Expose
-    private Object grayFebricsDetails;
-    @SerializedName("grayFebricsStorageMasters")
+    private List<GrayFabricIssueDetail> grayFabricIssueDetails = null;
+    @SerializedName("detailsIdArray")
     @Expose
-    private Object grayFebricsStorageMasters;
-    @SerializedName("grayStorageMastersForBooking")
-    @Expose
-    private Object grayStorageMastersForBooking;
-    @SerializedName("grayFabricRollViewModels")
-    @Expose
-    private Object grayFabricRollViewModels;
-    @SerializedName("grayFabricRackingViewModels")
-    @Expose
-    private Object grayFabricRackingViewModels;
-    @SerializedName("grayFebricsDetailViewModels")
-    @Expose
-    private Object grayFebricsDetailViewModels;
-    @SerializedName("items")
-    @Expose
-    private Object items;
-    @SerializedName("grayFabricIssueMasters")
-    @Expose
-    private List<GrayFabricIssueMaster> grayFabricIssueMasters = null;
-    @SerializedName("grayFabricIssueSuccessMasters")
-    @Expose
-    private Object grayFabricIssueSuccessMasters;
-    @SerializedName("grayFebricsMaster")
-    @Expose
-    private Object grayFebricsMaster;
+    private Object detailsIdArray;
 
-    public Object getId() {
-        return id;
+    public Object getIssueNo() {
+        return issueNo;
     }
 
-    public void setId(Object id) {
-        this.id = id;
+    public void setIssueNo(Object issueNo) {
+        this.issueNo = issueNo;
     }
 
-    public Object getReceiveNo() {
-        return receiveNo;
+    public Object getIssueDate() {
+        return issueDate;
     }
 
-    public void setReceiveNo(Object receiveNo) {
-        this.receiveNo = receiveNo;
+    public void setIssueDate(Object issueDate) {
+        this.issueDate = issueDate;
     }
 
-    public Object getAutoNo() {
-        return autoNo;
+    public Object getIssueBy() {
+        return issueBy;
     }
 
-    public void setAutoNo(Object autoNo) {
-        this.autoNo = autoNo;
-    }
-
-    public Object getReceiveDate() {
-        return receiveDate;
-    }
-
-    public void setReceiveDate(Object receiveDate) {
-        this.receiveDate = receiveDate;
-    }
-
-    public Object getInspectionDate() {
-        return inspectionDate;
-    }
-
-    public void setInspectionDate(Object inspectionDate) {
-        this.inspectionDate = inspectionDate;
-    }
-
-    public Object getReceiveBy() {
-        return receiveBy;
-    }
-
-    public void setReceiveBy(Object receiveBy) {
-        this.receiveBy = receiveBy;
-    }
-
-    public Object getMonthName() {
-        return monthName;
-    }
-
-    public void setMonthName(Object monthName) {
-        this.monthName = monthName;
-    }
-
-    public Object getStatusId() {
-        return statusId;
-    }
-
-    public void setStatusId(Object statusId) {
-        this.statusId = statusId;
+    public void setIssueBy(Object issueBy) {
+        this.issueBy = issueBy;
     }
 
     public Object getRemarks() {
@@ -154,100 +76,36 @@ public class RackoutById {
         this.isFinal = isFinal;
     }
 
-    public Object getGrayFebricsMasters() {
-        return grayFebricsMasters;
+    public Object getBatchNo() {
+        return batchNo;
     }
 
-    public void setGrayFebricsMasters(Object grayFebricsMasters) {
-        this.grayFebricsMasters = grayFebricsMasters;
+    public void setBatchNo(Object batchNo) {
+        this.batchNo = batchNo;
     }
 
-    public Object getReveivedGrayFabrics() {
-        return reveivedGrayFabrics;
+    public Object getGrayFabricIssueDetailViewModels() {
+        return grayFabricIssueDetailViewModels;
     }
 
-    public void setReveivedGrayFabrics(Object reveivedGrayFabrics) {
-        this.reveivedGrayFabrics = reveivedGrayFabrics;
+    public void setGrayFabricIssueDetailViewModels(Object grayFabricIssueDetailViewModels) {
+        this.grayFabricIssueDetailViewModels = grayFabricIssueDetailViewModels;
     }
 
-    public Object getGrayFebricsDetails() {
-        return grayFebricsDetails;
+    public List<GrayFabricIssueDetail> getGrayFabricIssueDetails() {
+        return grayFabricIssueDetails;
     }
 
-    public void setGrayFebricsDetails(Object grayFebricsDetails) {
-        this.grayFebricsDetails = grayFebricsDetails;
+    public void setGrayFabricIssueDetails(List<GrayFabricIssueDetail> grayFabricIssueDetails) {
+        this.grayFabricIssueDetails = grayFabricIssueDetails;
     }
 
-    public Object getGrayFebricsStorageMasters() {
-        return grayFebricsStorageMasters;
+    public Object getDetailsIdArray() {
+        return detailsIdArray;
     }
 
-    public void setGrayFebricsStorageMasters(Object grayFebricsStorageMasters) {
-        this.grayFebricsStorageMasters = grayFebricsStorageMasters;
-    }
-
-    public Object getGrayStorageMastersForBooking() {
-        return grayStorageMastersForBooking;
-    }
-
-    public void setGrayStorageMastersForBooking(Object grayStorageMastersForBooking) {
-        this.grayStorageMastersForBooking = grayStorageMastersForBooking;
-    }
-
-    public Object getGrayFabricRollViewModels() {
-        return grayFabricRollViewModels;
-    }
-
-    public void setGrayFabricRollViewModels(Object grayFabricRollViewModels) {
-        this.grayFabricRollViewModels = grayFabricRollViewModels;
-    }
-
-    public Object getGrayFabricRackingViewModels() {
-        return grayFabricRackingViewModels;
-    }
-
-    public void setGrayFabricRackingViewModels(Object grayFabricRackingViewModels) {
-        this.grayFabricRackingViewModels = grayFabricRackingViewModels;
-    }
-
-    public Object getGrayFebricsDetailViewModels() {
-        return grayFebricsDetailViewModels;
-    }
-
-    public void setGrayFebricsDetailViewModels(Object grayFebricsDetailViewModels) {
-        this.grayFebricsDetailViewModels = grayFebricsDetailViewModels;
-    }
-
-    public Object getItems() {
-        return items;
-    }
-
-    public void setItems(Object items) {
-        this.items = items;
-    }
-
-    public List<GrayFabricIssueMaster> getGrayFabricIssueMasters() {
-        return grayFabricIssueMasters;
-    }
-
-    public void setGrayFabricIssueMasters(List<GrayFabricIssueMaster> grayFabricIssueMasters) {
-        this.grayFabricIssueMasters = grayFabricIssueMasters;
-    }
-
-    public Object getGrayFabricIssueSuccessMasters() {
-        return grayFabricIssueSuccessMasters;
-    }
-
-    public void setGrayFabricIssueSuccessMasters(Object grayFabricIssueSuccessMasters) {
-        this.grayFabricIssueSuccessMasters = grayFabricIssueSuccessMasters;
-    }
-
-    public Object getGrayFebricsMaster() {
-        return grayFebricsMaster;
-    }
-
-    public void setGrayFebricsMaster(Object grayFebricsMaster) {
-        this.grayFebricsMaster = grayFebricsMaster;
+    public void setDetailsIdArray(Object detailsIdArray) {
+        this.detailsIdArray = detailsIdArray;
     }
 
 }
