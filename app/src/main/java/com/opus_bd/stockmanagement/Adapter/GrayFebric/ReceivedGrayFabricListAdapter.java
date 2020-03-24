@@ -12,10 +12,8 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.opus_bd.stockmanagement.Activity.GrayFabric.RackIn.GrayFebricDetailsActivity;
-
 import com.opus_bd.stockmanagement.Model.GrayFabric.ReceivedGrayFabric;
 import com.opus_bd.stockmanagement.R;
-import com.opus_bd.stockmanagement.Utilts.Utilities;
 
 import java.util.List;
 
@@ -105,15 +103,12 @@ public class ReceivedGrayFabricListAdapter extends RecyclerView.Adapter<Received
 
             //getPDF(id);
 
-            Utilities.showLogcatMessage("id" + id);
             ivView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(context, GrayFebricDetailsActivity.class);
                     intent.putExtra("Item getId", id);
                     // intent.putExtra("Item getAttachUrl", getAttachUrl());
-                    Utilities.showLogcatMessage(" Item Id " + id);
-                    // Utilities.showLogcatMessage(" Item  "+getAttachUrl());
                     context.startActivity(intent);
                 }
             });

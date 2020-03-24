@@ -16,6 +16,7 @@ import com.opus_bd.stockmanagement.Activity.GrayFabric.GaryFebricActivity;
 import com.opus_bd.stockmanagement.R;
 import com.opus_bd.stockmanagement.RetrofitService.RetrofitClientInstance;
 import com.opus_bd.stockmanagement.RetrofitService.RetrofitService;
+import com.opus_bd.stockmanagement.Utilts.Constants;
 import com.opus_bd.stockmanagement.Utilts.SharedPrefManager;
 import com.opus_bd.stockmanagement.Utilts.Utilities;
 
@@ -54,37 +55,42 @@ public class GrayFebricQrActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (result != null) {
-            if (result.getContents() == null) {
-                Toast.makeText(this, "Cancelled", LENGTH_LONG).show();
-            } else if(result.getContents().equals(RollNo)|result.getContents().equals(QrCode) ) {
-                text.setText("Matched Successfully Scan Again");
-                text.setTextColor(getResources().getColor(R.color.successColor));
-                c++;
-                Utilities.showLogcatMessage(" C++ "+c);
-                if(c==2){
-                    submitToServer(3);
-                    text.setText("Matched Successfully ");
+            for (int i = 0; i < Constants.rollList.size(); i++) {
+                if (result.getContents() == null) {
+                    Toast.makeText(this, "Cancelled", LENGTH_LONG).show();
+                } else if (result.getContents().equals(Constants.rollList.get(i)) | result.getContents().equals(Constants.qrList.get(i))) {
+                    text.setText("Matched Successfully Scan Again");
                     text.setTextColor(getResources().getColor(R.color.successColor));
-                    c=0;
-                }
+                    c++;
+                    Utilities.showLogcatMessage(" C++ "+c);
+                    if(c==2){
+                        submitToServer(Constants.rackIdList.get(i), Constants.detailsList.get(i));
+                        text.setText("Matched Successfully ");
+                        text.setTextColor(getResources().getColor(R.color.successColor));
+                        c=0;
+                    }
 
-                //Toast.makeText((Context)this, (CharSequence)("Scanned: " + result.getContents()), LENGTH_LONG).show();
-            }else /*if(!result.getContents().equals(itemname))*/ {
-                text.setText(" Not Matched!!");
-                text.setTextColor(getResources().getColor(R.color.errorColor));
-                //submitToServer(4);
-                //Toast.makeText((Context)this, (CharSequence)("Scanned: " + result.getContents()), LENGTH_LONG).show();
+                    //Toast.makeText((Context)this, (CharSequence)("Scanned: " + result.getContents()), LENGTH_LONG).show();
+                }else /*if(!result.getContents().equals(itemname))*/ {
+                    c = 0;
+                    text.setText(" Not Matched!!");
+                    text.setTextColor(getResources().getColor(R.color.errorColor));
+                    //submitToServer(4);
+                    //Toast.makeText((Context)this, (CharSequence)("Scanned: " + result.getContents()), LENGTH_LONG).show();
+                }
             }
+
+
         }
 
     }
 
-    private void submitToServer(int status) {
+    private void submitToServer(int rack, int detail) {
 
         String token = SharedPrefManager.getInstance(this).getToken();
 
         RetrofitService retrofitService = RetrofitClientInstance.getRetrofitInstance().create(RetrofitService.class);
-        Call<String> registrationRequest = retrofitService.UpdateGrayFabricReceiveStatusAPI(SharedPrefManager.BEARER + token,rackID,detailsid);
+        Call<String> registrationRequest = retrofitService.UpdateGrayFabricReceiveStatusAPI(SharedPrefManager.BEARER + token, rack, detail);
         registrationRequest.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {

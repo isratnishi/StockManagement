@@ -1,5 +1,7 @@
 package com.opus_bd.stockmanagement.Utilts;
 
+import java.util.ArrayList;
+
 public class Constants {
     public static final float PROGRESSBAR_ALPHA = 0.6f;
     public static final float PROGRESSBAR_AFTER_FINISH_ALPHA = 1f;
@@ -18,7 +20,10 @@ public class Constants {
     // Titles
     public static String BANGLA_TITLE = "বাংলা";
     public static String ENGLISH_TITLE = "ENG";
-
+    public static ArrayList<String> rollList = new ArrayList<>();
+    public static ArrayList<String> qrList = new ArrayList<>();
+    public static ArrayList<Integer> rackIdList = new ArrayList<>();
+    public static ArrayList<Integer> detailsList = new ArrayList<>();
     // Languages
     public static String ENGLISH = "en";
     public static String BANGLA = "bd";

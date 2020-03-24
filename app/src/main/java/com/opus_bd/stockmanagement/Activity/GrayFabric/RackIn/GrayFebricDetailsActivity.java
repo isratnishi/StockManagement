@@ -17,6 +17,7 @@ import com.opus_bd.stockmanagement.Model.GrayFabric.GrayFebricDetails;
 import com.opus_bd.stockmanagement.R;
 import com.opus_bd.stockmanagement.RetrofitService.RetrofitClientInstance;
 import com.opus_bd.stockmanagement.RetrofitService.RetrofitService;
+import com.opus_bd.stockmanagement.Utilts.Constants;
 import com.opus_bd.stockmanagement.Utilts.SharedPrefManager;
 import com.opus_bd.stockmanagement.Utilts.Utilities;
 
@@ -24,6 +25,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import es.dmoral.toasty.Toasty;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -76,6 +78,18 @@ public class GrayFebricDetailsActivity extends AppCompatActivity {
                     public void onResponse(Call<GrayFebricDetails> call, @NonNull Response<GrayFebricDetails> response) {
                         if (response.body() != null) {
                             Utilities.showLogcatMessage(" Gray response 2"+response.body());
+                            Constants.rollList.clear();
+                            Constants.qrList.clear();
+                            Constants.rackIdList.clear();
+                            Constants.detailsList.clear();
+                            for (int i = 0; i < response.body().getGrayFabricDetailsViewModels().size(); i++) {
+                                Constants.rollList.add(response.body().getGrayFabricDetailsViewModels().get(i).getRollNo());
+                                Constants.qrList.add(response.body().getGrayFabricDetailsViewModels().get(i).getQrCode());
+                                Constants.rackIdList.add(response.body().getGrayFabricDetailsViewModels().get(i).getRackId());
+                                Constants.detailsList.add(response.body().getGrayFabricDetailsViewModels().get(i).getDetailsId());
+                                Utilities.showLogcatMessage("QR LIst " + Constants.qrList.get(i));
+                            }
+
                             noticeArrayList.clear();
                             noticeArrayList.addAll(response.body().getGrayFabricDetailsViewModels());
                             noticeListAdapter.notifyDataSetChanged();
@@ -106,6 +120,11 @@ public class GrayFebricDetailsActivity extends AppCompatActivity {
         }
     }
 
+    @OnClick(R.id.btnRackIn)
+    public void Rackin() {
+        Intent intent = new Intent(GrayFebricDetailsActivity.this, GrayFebricQrActivity.class);
+        startActivity(intent);
+    }
     @Override
     public void onBackPressed() {
 

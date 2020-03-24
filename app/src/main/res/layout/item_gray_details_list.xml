@@ -288,6 +288,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/btnRackIn"
         android:layout_weight="1"
+        android:visibility="gone"
         android:layout_gravity="center"/>
 
     <Button
@@ -296,6 +297,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/btnChange"
         android:layout_weight="1"
+        android:visibility="gone"
         android:layout_gravity="center"/>
 </LinearLayout>
 
