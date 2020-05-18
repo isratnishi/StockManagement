@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 import com.opus_bd.stockmanagement.Activity.GrayFabric.RackIn.GrayFebricRackInActivity;
 import com.opus_bd.stockmanagement.Activity.GrayFabric.Rackout.GrayFebricRackOutActivity;
+import com.opus_bd.stockmanagement.Activity.GrayFabric.Scan.GrayFebricScanQrActivity;
 import com.opus_bd.stockmanagement.Activity.ListActivity;
 import com.opus_bd.stockmanagement.R;
 
@@ -32,13 +33,22 @@ public class GaryFebricActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-        ButterKnife.bind(this);
+
         imageload();
     }
 
     public void imageload() {
         Glide.with(this).load(R.drawable.ic_rackin).into(ivFinishedFebric);
         Glide.with(this).load(R.drawable.ic_rackout).into(ivGrayFebric);
+
+    }
+
+    @OnClick(R.id.btnScan)
+    public void btnScan() {
+        Intent intent = new Intent(GaryFebricActivity.this, GrayFebricScanQrActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
 
     }
 

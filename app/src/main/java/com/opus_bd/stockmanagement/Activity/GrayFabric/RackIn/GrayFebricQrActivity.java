@@ -31,6 +31,7 @@ public class GrayFebricQrActivity extends AppCompatActivity {
     TextView text;
     int detailsid,rackID,c=0;
     String RollNo,QrCode;
+    int id1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,20 +59,54 @@ public class GrayFebricQrActivity extends AppCompatActivity {
             for (int i = 0; i < Constants.rollList.size(); i++) {
                 if (result.getContents() == null) {
                     Toast.makeText(this, "Cancelled", LENGTH_LONG).show();
-                } else if (result.getContents().equals(Constants.rollList.get(i)) | result.getContents().equals(Constants.qrList.get(i))) {
+                } else if (result.getContents().equals(Constants.rollList.get(i))) {
                     text.setText("Matched Successfully Scan Again");
+                    id1 = i;
+                    Utilities.showLogcatMessage(" id1 " + id1);
                     text.setTextColor(getResources().getColor(R.color.successColor));
                     c++;
+                    Utilities.showLogcatMessage(" C++ " + c);
+                   /* if(c==1 && result.getContents().equals(Constants.qrList.get(i))){
+                        //submitToServer(Constants.rackIdList.get(i), Constants.detailsList.get(i));
+                        text.setText("Matched Successfully ");
+                        text.setTextColor(getResources().getColor(R.color.successColor));
+                        c++;
+                    } if(c==2){
+                        submitToServer(Constants.rackIdList.get(i), Constants.detailsList.get(i));
+                        text.setText("Matched Successfully ");
+                        text.setTextColor(getResources().getColor(R.color.successColor));
+                        c=0;
+                    }*/
+
+                    //Toast.makeText((Context)this, (CharSequence)("Scanned: " + result.getContents()), LENGTH_LONG).show();
+                } else {
+                    c = 0;
+                    text.setText(" Not Matched!!" + result);
+                    text.setTextColor(getResources().getColor(R.color.errorColor));
+                    //submitToServer(4);
+                    //Toast.makeText((Context)this, (CharSequence)("Scanned: " + result.getContents()), LENGTH_LONG).show();
+                }
+            }
+
+           /* for (int i = 0; i < Constants.grayFabricDetailsViewModelArrayList.size(); i++) {
+                if (result.getContents() == null) {
+                    Toast.makeText(this, "Cancelled", LENGTH_LONG).show();
+                } else if (result.getContents().equals(Constants.grayFabricDetailsViewModelArrayList.get(i).getRollNo())) {
+                    text.setText("Matched Successfully Scan Again");
+                    text.setTextColor(getResources().getColor(R.color.successColor));
+                    id1=i;
+                  //  break;
+                   *//* c++;
                     Utilities.showLogcatMessage(" C++ "+c);
                     if(c==2){
                         submitToServer(Constants.rackIdList.get(i), Constants.detailsList.get(i));
                         text.setText("Matched Successfully ");
                         text.setTextColor(getResources().getColor(R.color.successColor));
                         c=0;
-                    }
+                    }*//*
 
                     //Toast.makeText((Context)this, (CharSequence)("Scanned: " + result.getContents()), LENGTH_LONG).show();
-                }else /*if(!result.getContents().equals(itemname))*/ {
+                }else *//*if(!result.getContents().equals(itemname))*//* {
                     c = 0;
                     text.setText(" Not Matched!!");
                     text.setTextColor(getResources().getColor(R.color.errorColor));
@@ -80,7 +115,27 @@ public class GrayFebricQrActivity extends AppCompatActivity {
                 }
             }
 
+            if (result.getContents().equals(Constants.grayFabricDetailsViewModelArrayList.get(id1).getQrCode())) {
+                text.setText("Matched Successfully ");
+                text.setTextColor(getResources().getColor(R.color.successColor));
+                submitToServer(Constants.grayFabricDetailsViewModelArrayList.get(id1).getRackId(), Constants.grayFabricDetailsViewModelArrayList.get(id1).getDetailsId());
+                   *//* c++;
+                    Utilities.showLogcatMessage(" C++ "+c);
+                    if(c==2){
+                        submitToServer(Constants.rackIdList.get(i), Constants.detailsList.get(i));
+                        text.setText("Matched Successfully ");
+                        text.setTextColor(getResources().getColor(R.color.successColor));
+                        c=0;
+                    }*//*
 
+                //Toast.makeText((Context)this, (CharSequence)("Scanned: " + result.getContents()), LENGTH_LONG).show();
+            }else *//*if(!result.getContents().equals(itemname))*//* {
+                c = 0;
+                text.setText(" Not Matched!!");
+                text.setTextColor(getResources().getColor(R.color.errorColor));
+                //submitToServer(4);
+                //Toast.makeText((Context)this, (CharSequence)("Scanned: " + result.getContents()), LENGTH_LONG).show();
+            }*/
         }
 
     }

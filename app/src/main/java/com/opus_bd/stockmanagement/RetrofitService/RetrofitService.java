@@ -10,6 +10,7 @@ import com.opus_bd.stockmanagement.Model.GrayFabric.RackIn.GrayFabricRackingList
 import com.opus_bd.stockmanagement.Model.GrayFabric.RackOut.Rackout;
 import com.opus_bd.stockmanagement.Model.GrayFabric.RackOut.RackoutById;
 import com.opus_bd.stockmanagement.Model.GrayFabric.ReceivedGrayFabric;
+import com.opus_bd.stockmanagement.Model.GrayFabric.Scan.GrayRollDetailInfo;
 import com.opus_bd.stockmanagement.Model.GrayFabric.StockIn.GrayFabricStorageList;
 import com.opus_bd.stockmanagement.Model.LoginResponce;
 import com.opus_bd.stockmanagement.Model.Stockout.GetFinishFabricListForIssue;
@@ -42,6 +43,9 @@ public interface RetrofitService {
     @GET("api/GrayFabric/GetAllCurrentGrayFebricDetailsByReceiveIdApi/{Id}")
     Call<GrayFebricDetails> GetAllCurrentGrayFebricDetailsByReceiveIdApi(@Header("Authorization") String token, @Path("Id") int id);
 
+    @GET("api/GrayFabric/GetGrayRollDetailInfo/{rollNo}")
+    Call<GrayRollDetailInfo> GetGrayRollDetailInfo(@Header("Authorization") String token, @Path("rollNo") String rollNo);
+
     @GET("api/GrayFabric/GetReceivedGrayFabricBeforeRackIn")
     Call<List<ReceivedGrayFabric>> GetReceivedGrayFabricBeforeRackIn(@Header("Authorization") String token);
 
@@ -65,13 +69,10 @@ public interface RetrofitService {
     Call<String> UpdateGrayFabricReceiveStatusAPI(@Header("Authorization") String token, @Path("rackId") int masterId, @Path("detailsId") int id);
 
 
-
     @PUT("api/GrayFabric/UpdateGrayFabricReceiveStatusAndLocationAPI/{detailsId}/{qrCode}")
     Call<String> UpdateGrayFabricReceiveStatusAndLocationAPI(@Header("Authorization") String token, @Path("detailsId") int detailsId, @Path("qrCode") String qrCode);
 
     //Finished fabric
-
-
 
 
     @GET("api/FinishFabric/GetFinishFabricReceivedList")

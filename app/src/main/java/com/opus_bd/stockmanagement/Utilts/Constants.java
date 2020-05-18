@@ -1,6 +1,9 @@
 package com.opus_bd.stockmanagement.Utilts;
 
+import com.opus_bd.stockmanagement.Model.GrayFabric.GrayFabricDetailsViewModel;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class Constants {
     public static final float PROGRESSBAR_ALPHA = 0.6f;
@@ -20,10 +23,11 @@ public class Constants {
     // Titles
     public static String BANGLA_TITLE = "বাংলা";
     public static String ENGLISH_TITLE = "ENG";
-    public static ArrayList<String> rollList = new ArrayList<>();
-    public static ArrayList<String> qrList = new ArrayList<>();
-    public static ArrayList<Integer> rackIdList = new ArrayList<>();
-    public static ArrayList<Integer> detailsList = new ArrayList<>();
+    public static List<String> rollList = new ArrayList<>();
+    public static List<String> qrList = new ArrayList<>();
+    public static List<Integer> rackIdList = new ArrayList<>();
+    public static List<Integer> detailsList = new ArrayList<>();
+    public static ArrayList<GrayFabricDetailsViewModel> grayFabricDetailsViewModelArrayList = new ArrayList<>();
     // Languages
     public static String ENGLISH = "en";
     public static String BANGLA = "bd";

@@ -12,7 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activity.GrayFabric.Rackout.GrayfebricRackOutQrActivity"></activity>
+        <activity android:name=".Activity.GrayFabric.Scan.GrayFebricScanQrActivity"></activity>
+        <activity android:name=".Activity.GrayFabric.Scan.GaryFebricScanActivity" />
+        <activity android:name=".Activity.GrayFabric.Rackout.GrayfebricRackOutQrActivity" />
         <activity android:name=".Activity.GrayFabric.Rackout.GrayFebricRackoutbyidActivity" />
         <activity android:name=".Activity.GrayFabric.Rackout.GrayFebricRackOutActivity" />
         <activity android:name=".Activity.GrayFabric.RackIn.GrayFebricRackInActivity" />

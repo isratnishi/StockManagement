@@ -82,14 +82,17 @@ public class GrayFebricDetailsActivity extends AppCompatActivity {
                             Constants.qrList.clear();
                             Constants.rackIdList.clear();
                             Constants.detailsList.clear();
+                            Constants.grayFabricDetailsViewModelArrayList.clear();
                             for (int i = 0; i < response.body().getGrayFabricDetailsViewModels().size(); i++) {
                                 Constants.rollList.add(response.body().getGrayFabricDetailsViewModels().get(i).getRollNo());
                                 Constants.qrList.add(response.body().getGrayFabricDetailsViewModels().get(i).getQrCode());
                                 Constants.rackIdList.add(response.body().getGrayFabricDetailsViewModels().get(i).getRackId());
                                 Constants.detailsList.add(response.body().getGrayFabricDetailsViewModels().get(i).getDetailsId());
                                 Utilities.showLogcatMessage("QR LIst " + Constants.qrList.get(i));
+                                Utilities.showLogcatMessage("Roll LIst " + Constants.rollList.get(i));
                             }
 
+                            Constants.grayFabricDetailsViewModelArrayList.addAll(response.body().getGrayFabricDetailsViewModels());
                             noticeArrayList.clear();
                             noticeArrayList.addAll(response.body().getGrayFabricDetailsViewModels());
                             noticeListAdapter.notifyDataSetChanged();
