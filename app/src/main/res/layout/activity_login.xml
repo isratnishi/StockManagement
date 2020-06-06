@@ -67,6 +67,7 @@
                     android:text="@string/user_name"
                     android:textAlignment="center"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
+                    android:gravity="center_horizontal"
                     android:textColor="@color/blue_grey_800" />
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -74,7 +75,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="-4dp"
-                    android:text="Suza"
+                    android:text="rackowner1"
                     android:layout_marginRight="-4dp"
 
                     android:maxLength="50"
@@ -92,6 +93,7 @@
                     android:text="@string/password"
                     android:textAlignment="center"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
+                    android:gravity="center_horizontal"
                     android:textColor="@color/blue_grey_800" />
 
                 <com.google.android.material.textfield.TextInputEditText

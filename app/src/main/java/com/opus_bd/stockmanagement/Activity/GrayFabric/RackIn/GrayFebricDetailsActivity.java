@@ -122,7 +122,7 @@ public class GrayFebricDetailsActivity extends AppCompatActivity {
 
     @OnClick(R.id.btnRackIn)
     public void Rackin() {
-        Intent intent = new Intent(GrayFebricDetailsActivity.this, GrayFebricQrActivity.class);
+        Intent intent = new Intent(GrayFebricDetailsActivity.this, QRActivity.class);
         startActivity(intent);
     }
     @Override

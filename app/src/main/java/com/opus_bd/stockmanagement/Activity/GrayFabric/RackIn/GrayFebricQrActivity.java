@@ -52,6 +52,7 @@ public class GrayFebricQrActivity extends AppCompatActivity {
         }
     }
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        Utilities.showLogcatMessage(" No Error");
         super.onActivityResult(requestCode, resultCode, data);
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (result != null) {

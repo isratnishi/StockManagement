@@ -9,7 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.opus_bd.stockmanagement.Activity.GrayFabric.RackIn.GrayFebricRackInActivity;
-import com.opus_bd.stockmanagement.Activity.GrayFabric.Rackout.GrayFebricRackOutActivity;
+import com.opus_bd.stockmanagement.Activity.GrayFabric.RackIn.QRActivity;
+import com.opus_bd.stockmanagement.Activity.GrayFabric.Rackout.GrayfebricRackOutQrActivity;
 import com.opus_bd.stockmanagement.Activity.ListActivity;
 import com.opus_bd.stockmanagement.R;
 
@@ -23,6 +24,8 @@ public class GaryFebricActivity extends AppCompatActivity {
 
     @BindView(R.id.ivGrayFebric)
     ImageView ivGrayFebric;
+    @BindView(R.id.ivGrayFebricTrans)
+    ImageView ivGrayFebricTrans;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +41,17 @@ public class GaryFebricActivity extends AppCompatActivity {
 
     public void imageload() {
         Glide.with(this).load(R.drawable.ic_rackin).into(ivFinishedFebric);
-        Glide.with(this).load(R.drawable.ic_rackout).into(ivGrayFebric);
+        Glide.with(this).load(R.drawable.ic_rackin).into(ivFinishedFebric);
+        Glide.with(this).load(R.drawable.finised_febric).into(ivGrayFebricTrans);
 
     }
 
+    @OnClick(R.id.btnScan)
+    public void btnScan() {
+        Intent intent = new Intent(GaryFebricActivity.this, QRActivity.class);
+        startActivity(intent);
+
+    }
     @OnClick(R.id.cvFinishedFebric)
     public void cvFinishedFebricOnclick() {
         Intent intent = new Intent(GaryFebricActivity.this, GrayFebricRackInActivity.class);
@@ -51,7 +61,7 @@ public class GaryFebricActivity extends AppCompatActivity {
 
     } @OnClick(R.id.cvGrayFebric)
     public void cvGrayFebricOnclick() {
-        Intent intent = new Intent(GaryFebricActivity.this, GrayFebricRackOutActivity.class);
+        Intent intent = new Intent(GaryFebricActivity.this, GrayfebricRackOutQrActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);

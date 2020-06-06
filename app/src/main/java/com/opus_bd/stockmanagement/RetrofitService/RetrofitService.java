@@ -6,10 +6,12 @@ import com.opus_bd.stockmanagement.Model.DashBoard.AllStorageDetailsInfo;
 import com.opus_bd.stockmanagement.Model.FabricDetails;
 import com.opus_bd.stockmanagement.Model.FinishFabricStorageByRecevedNo;
 import com.opus_bd.stockmanagement.Model.GrayFabric.GrayFebricDetails;
+import com.opus_bd.stockmanagement.Model.GrayFabric.MultipleRollRackInModel;
 import com.opus_bd.stockmanagement.Model.GrayFabric.RackIn.GrayFabricRackingList;
 import com.opus_bd.stockmanagement.Model.GrayFabric.RackOut.Rackout;
 import com.opus_bd.stockmanagement.Model.GrayFabric.RackOut.RackoutById;
 import com.opus_bd.stockmanagement.Model.GrayFabric.ReceivedGrayFabric;
+import com.opus_bd.stockmanagement.Model.GrayFabric.Scan.GrayRollDetailInfo;
 import com.opus_bd.stockmanagement.Model.GrayFabric.StockIn.GrayFabricStorageList;
 import com.opus_bd.stockmanagement.Model.LoginResponce;
 import com.opus_bd.stockmanagement.Model.Stockout.GetFinishFabricListForIssue;
@@ -45,7 +47,8 @@ public interface RetrofitService {
     @GET("api/GrayFabric/GetReceivedGrayFabricBeforeRackIn")
     Call<List<ReceivedGrayFabric>> GetReceivedGrayFabricBeforeRackIn(@Header("Authorization") String token);
 
-
+    @GET("api/GrayFabric/GetGrayRollDetailInfo/{rollNo}")
+    Call<GrayRollDetailInfo> GetGrayRollDetailInfo(@Header("Authorization") String token, @Path("rollNo") String rollNo);
     @GET("api/GrayFabric/GetReceivedGrayFabricStorageList  ")
     Call<List<ReceivedGrayFabric>> GetReceivedGrayFabricStorageList(@Header("Authorization") String token);
 
@@ -100,5 +103,13 @@ public interface RetrofitService {
 
     @GET("api/FinishFabric/GetAllStorageDetailsInfo")
     Call<List<AllStorageDetailsInfo>> GetAllStorageDetailsInfo(@Header("Authorization") String token);
+//Gray Febric
+
+    @POST("api/GrayFabric/UpdateGrayFabricMultipleRollRackIn")
+    Call<String> UpdateGrayFabricMultipleRollRackIn(@Header("Authorization") String token, @Body MultipleRollRackInModel multipleRollRackInModel);
+
+    @PUT("api/GrayFabric/GrayFabricRackOutEditAPI/{derailsId}")
+    Call<String> UpdateFinishFabricReceiveStatus(@Header("Authorization") String token, @Path("derailsId") int derailsId);
+
 
 }
