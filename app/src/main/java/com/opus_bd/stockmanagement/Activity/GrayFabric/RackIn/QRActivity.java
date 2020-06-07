@@ -47,11 +47,8 @@ public class QRActivity extends AppCompatActivity {
     int c = 0, rackid, detailsid;
     String qr;
     ArrayList<String> rollList = new ArrayList<String>();
-    ArrayList<Integer> rollItemList = new ArrayList<>();
     ArrayList<Roll> rollArrayList = new ArrayList<>();
     RollListAdapter rollListAdapter;
-
-
     @BindView(R.id.rvRoll)
     RecyclerView rvRoll;
 
@@ -107,7 +104,6 @@ public class QRActivity extends AppCompatActivity {
                 if (btncode == 1) {
                     Addroll(result.getContents());
                     GetGrayRollDetailInfo(result.getContents());
-                    // Toast.makeText((Context)this, (CharSequence)("Scanned: " + result.getContents()), LENGTH_LONG).show();
                 } else {
                     submitToServer(result.getContents());
                 }
@@ -119,39 +115,24 @@ public class QRActivity extends AppCompatActivity {
     }
 
     public void GetGrayRollDetailInfo(String id) {
-        Utilities.showLogcatMessage(" Gray response 0");
+
         RetrofitService retrofitService = RetrofitClientInstance.getRetrofitInstance().create(RetrofitService.class);
-        //  Call<LoginResponce> registrationRequest = retrofitService.GetFinishFabricReceivedList(userModel);
         String token = SharedPrefManager.getInstance(this).getToken();
 
         if (token != null) {
-            Utilities.showLogcatMessage(" Gray response token");
+
             Call<GrayRollDetailInfo> registrationRequest = retrofitService.GetGrayRollDetailInfo(SharedPrefManager.BEARER + token, id);
 
             try {
-                Utilities.showLogcatMessage(" Gray response 1");
+
                 registrationRequest.enqueue(new Callback<GrayRollDetailInfo>() {
                     @Override
                     public void onResponse(Call<GrayRollDetailInfo> call, @NonNull Response<GrayRollDetailInfo> response) {
-                        Utilities.showLogcatMessage(" Gray response 2" + response.body());
+
                         if (response.body() != null) {
-                            Utilities.showLogcatMessage(" Gray response 3" + response.body());
-                            rollItemList.add(rollItemList.size(), response.body().getGrayFebricsDetailId());
-                          /*  for (int i = 0; i < rollItemList.size(); i++) {
-                                rollItemList.add(rollItemList.size(),response.body().getGrayFebricsDetailId());
-                            }*/
-
-                           /* tvRollNo.setText(response.body().getGrayFebricsDetail().getRollNo());
-                            tvLocation.setText(response.body().getGrayFebricsStorageDetail().getCellNo());
-
-                            tvQuantity.setText(String.valueOf(response.body().getGrayFebricsDetail().getGQTY()));
-
-                            if(response.body().getStatusId()==3){
-                                tvStatus.setText("Already Stored");
-                            }
-                            else {
-                                tvStatus.setText("Not Yet Stored");
-                            }*/
+                            Roll roll1 = new Roll();
+                            roll1.setDetailsId(response.body().getGrayFebricsDetailId());
+                            rollArrayList.add(rollArrayList.size(), roll1);
 
                             qr = response.body().getGrayFebricsStorageDetail().getQrCode();
                             rackid = response.body().getId();
@@ -159,10 +140,8 @@ public class QRActivity extends AppCompatActivity {
                         } else {
                             Toasty.error(QRActivity.this, "SESSION_EXPIRED", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(QRActivity.this, List2Activity.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
+                            finish();
                         }
                     }
 
@@ -178,24 +157,17 @@ public class QRActivity extends AppCompatActivity {
         } else {
             Toasty.error(this, "SESSION_EXPIRED", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, LoginActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
+            finish();
         }
     }
 
     private void submitToServer(String rack) {
-        Roll roll = new Roll();
-        for (int i = 0; i < rollItemList.size(); i++) {
-            roll.setDetailsId(rollItemList.get(i));
-            rollArrayList.add(roll);
-        }
 
         String token = SharedPrefManager.getInstance(this).getToken();
         MultipleRollRackInModel multipleRollRackInModel = new MultipleRollRackInModel();
         multipleRollRackInModel.setQrCode(rack);
         multipleRollRackInModel.setRolls(rollArrayList);
-        for (int i = 0; i < rollArrayList.size(); i++)
-            Utilities.showLogcatMessage("rollArrayList " + rollArrayList.get(i).getDetailsId());
 
         RetrofitService retrofitService = RetrofitClientInstance.getRetrofitInstance().create(RetrofitService.class);
         Call<String> registrationRequest = retrofitService.UpdateGrayFabricMultipleRollRackIn(SharedPrefManager.BEARER + token, multipleRollRackInModel);
@@ -226,64 +198,11 @@ public class QRActivity extends AppCompatActivity {
         });
     }
 
-   /* private void submitToServerforChange(int di, String qr) {
-
-        String token = SharedPrefManager.getInstance(this).getToken();
-
-        RetrofitService retrofitService = RetrofitClientInstance.getRetrofitInstance().create(RetrofitService.class);
-        Call<String> registrationRequest = retrofitService.UpdateGrayFabricReceiveStatusAndLocationAPI(SharedPrefManager.BEARER + token, di, qr);
-        registrationRequest.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                try {
-                    if (response.body() != null) {
-                        Toast.makeText(QRActivity.this, response.body(), Toast.LENGTH_SHORT).show();
-                        //   finish();
-                        startActivity(new Intent(QRActivity.this, GaryFebricActivity.class));
-
-                    } else {
-                        Toast.makeText(QRActivity.this, "Invalid Credentials!", Toast.LENGTH_SHORT).show();
-                    }
-                } catch (Exception e) {
-                    Toast.makeText(QRActivity.this, "Something went Wrong! Please try again later", Toast.LENGTH_SHORT).show();
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-
-                Toast.makeText(QRActivity.this, "Fail to connect " + t.toString(), Toast.LENGTH_SHORT).show();
-
-            }
-        });
-    }*/
-
-   /* public void showAlert(int detail, String Qrc) {
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setMessage("QR code not matched . Are you sure to submit here?");
-        alertDialogBuilder.setPositiveButton("Yes",
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface arg0, int arg1) {
-                        submitToServerforChange(detail, Qrc);
-                    }
-                });
-
-        alertDialogBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-            }
-        });
-
-        AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.show();
-    }*/
 
     @Override
     public void onBackPressed() {
 
-        Intent intent = new Intent(this, GrayFebricDetailsActivity.class);
+        Intent intent = new Intent(this, GaryFebricActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
@@ -295,8 +214,6 @@ public class QRActivity extends AppCompatActivity {
 
         try {
             rollList.add(counterRoll + ". " + rollNO);
-            //addressListAdapter.notifyItemInserted(addressListAdapter.getItemCount()+1);
-
             rollListAdapter.notifyDataSetChanged();
 
             for (int i = 0; i < rollList.size(); i++) {

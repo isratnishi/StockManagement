@@ -12,6 +12,7 @@ import com.opus_bd.stockmanagement.Activity.GrayFabric.RackIn.GrayFebricRackInAc
 import com.opus_bd.stockmanagement.Activity.GrayFabric.RackIn.QRActivity;
 import com.opus_bd.stockmanagement.Activity.GrayFabric.Rackout.GrayfebricRackOutQrActivity;
 import com.opus_bd.stockmanagement.Activity.ListActivity;
+import com.opus_bd.stockmanagement.Activity.WareHouseActivity;
 import com.opus_bd.stockmanagement.R;
 
 import butterknife.BindView;
@@ -41,7 +42,7 @@ public class GaryFebricActivity extends AppCompatActivity {
 
     public void imageload() {
         Glide.with(this).load(R.drawable.ic_rackin).into(ivFinishedFebric);
-        Glide.with(this).load(R.drawable.ic_rackin).into(ivFinishedFebric);
+        Glide.with(this).load(R.drawable.ic_rackout).into(ivGrayFebric);
         Glide.with(this).load(R.drawable.finised_febric).into(ivGrayFebricTrans);
 
     }
@@ -55,16 +56,14 @@ public class GaryFebricActivity extends AppCompatActivity {
     @OnClick(R.id.cvFinishedFebric)
     public void cvFinishedFebricOnclick() {
         Intent intent = new Intent(GaryFebricActivity.this, GrayFebricRackInActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+        finish();
 
     } @OnClick(R.id.cvGrayFebric)
     public void cvGrayFebricOnclick() {
         Intent intent = new Intent(GaryFebricActivity.this, GrayfebricRackOutQrActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+        finish();
 
     }
     @Override
@@ -78,5 +77,13 @@ public class GaryFebricActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        Intent intent = new Intent(this, WareHouseActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 }

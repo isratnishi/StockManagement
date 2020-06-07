@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -32,7 +31,7 @@ import static android.widget.Toast.LENGTH_LONG;
 
 public class GrayfebricRackOutQrActivity extends AppCompatActivity {
     Button button_scan_qr_code;
-    TextView text;
+
     int detailsid;
     String RollNo;
 
@@ -40,7 +39,7 @@ public class GrayfebricRackOutQrActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_grayfebric_rack_out_qr);
-        button_scan_qr_code = findViewById(R.id.button_scan_qr_code);
+        button_scan_qr_code = findViewById(R.id.buttonScanRoll);
 
         button_scan_qr_code.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,16 +133,16 @@ public class GrayfebricRackOutQrActivity extends AppCompatActivity {
     private void submitToServer(int status) {
 
         String token = SharedPrefManager.getInstance(this).getToken();
-
+        Utilities.showLogcatMessage("token " + token);
         RetrofitService retrofitService = RetrofitClientInstance.getRetrofitInstance().create(RetrofitService.class);
-        Call<String> registrationRequest = retrofitService.GrayFabricRackOutEditAPI(SharedPrefManager.BEARER + token, detailsid);
+        Utilities.showLogcatMessage("detailsid " + status);
+        Call<String> registrationRequest = retrofitService.GrayFabricRackOutEditAPI(SharedPrefManager.BEARER + token, status);
         registrationRequest.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 try {
                     if (response.body() != null) {
-                        text.setText(response.body());
-                        text.setTextColor(getResources().getColor(R.color.successColor));
+
                         Toast.makeText(GrayfebricRackOutQrActivity.this, response.body(), Toast.LENGTH_SHORT).show();
                         //   finish();
                         startActivity(new Intent(GrayfebricRackOutQrActivity.this, GaryFebricActivity.class));
@@ -169,7 +168,7 @@ public class GrayfebricRackOutQrActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
-        Intent intent = new Intent(this, GrayFebricRackoutbyidActivity.class);
+        Intent intent = new Intent(this, GaryFebricActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
