@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.gson.Gson;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.opus_bd.stockmanagement.Activity.GrayFabric.GaryFebricActivity;
@@ -140,18 +141,38 @@ public class GrayfebricRackOutQrActivity extends AppCompatActivity {
         registrationRequest.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
+                Gson gson = new Gson();
+                Utilities.showLogcatMessage(gson.toJson(response.body()));
+                Utilities.showLogcatMessage(gson.toJson(response));
+
                 try {
                     if (response.body() != null) {
+                        Utilities.showLogcatMessage("response.msg() " + response.message());
+                        Utilities.showLogcatMessage("response.body() " + response.body());
+                        Utilities.showLogcatMessage("response.full() " + response.toString());
+                        Utilities.showLogcatMessage("response.len() " + response.body().length());
+                        if (!response.body().contains("item")) {
+                            Toasty.success(GrayfebricRackOutQrActivity.this, "Success").show();
+                            ;//   finish();
 
-                        Toast.makeText(GrayfebricRackOutQrActivity.this, response.body(), Toast.LENGTH_SHORT).show();
-                        //   finish();
+                        } else {
+                            Toasty.error(GrayfebricRackOutQrActivity.this, "Item Not Found").show();
+                            ;//   finish();
+                        }
+                        //Toast.makeText(GrayfebricRackOutQrActivity.this, response.body().toString(), Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(GrayfebricRackOutQrActivity.this, GaryFebricActivity.class));
 
                     } else {
-                        Toast.makeText(GrayfebricRackOutQrActivity.this, "Invalid Credentials!", Toast.LENGTH_SHORT).show();
+                        Toasty.error(GrayfebricRackOutQrActivity.this, "Invalid Credentials!").show();
+                        ;//   finish();
+
+                        //Toast.makeText(GrayfebricRackOutQrActivity.this, , Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
-                    Toast.makeText(GrayfebricRackOutQrActivity.this, "Something went Wrong! Please try again later", Toast.LENGTH_SHORT).show();
+                    Toasty.error(GrayfebricRackOutQrActivity.this, "Something went Wrong! Please try again later!").show();
+                    ;//   finish();
+
+                    //  Toast.makeText(GrayfebricRackOutQrActivity.this, "Something went Wrong! Please try again later", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -160,7 +181,7 @@ public class GrayfebricRackOutQrActivity extends AppCompatActivity {
             public void onFailure(Call<String> call, Throwable t) {
 
                 Toast.makeText(GrayfebricRackOutQrActivity.this, "Fail to connect " + t.toString(), Toast.LENGTH_SHORT).show();
-
+                Utilities.showLogcatMessage("Fail to connect " + t.toString());
             }
         });
     }
